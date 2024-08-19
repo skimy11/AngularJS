@@ -1,0 +1,185 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.content {
+  top: 48px;
+  width: 100%;
+  height: calc(100% - 48px);
+  /* background: #2f4057; */
+  float: left;
+  position: relative;
+  z-index: 0;
+}
+
+.vertical-menu {
+  width: 100%;
+  position: absolute;
+  background-color: #333;
+  /* Remove overflow: hidden; to allow content to overflow */
+  /* overflow: hidden; */
+  z-index: 1;
+}
+
+.vertical-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vertical-menu li {
+  width: 100px;
+  float: left;
+}
+
+.vertical-menu a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #555;
+}
+
+.has-submenu {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  z-index: 2;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+}
+
+.submenu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.submenu li {
+  clear: both;
+  width: 100%;
+}
+
+.submenu a {
+  padding: 12px 16px;
+}
+
+
+.default-btn {
+	background-color: #555; /* 기본 배경색 */
+	color: white; /* 기본 텍스트 색상 */
+	border: 1px solid white;
+	border-radius: 5px;
+	cursor: pointer;
+	
+}
+
+.default-btn:hover {
+	background-color: white; /* hover 시 배경색 변경 */
+	font-weight: bold;
+	color: #555; /* 기본 텍스트 색상 */
+	border: 1px solid #555;
+	transition: background-color 0.2s;
+	
+}
+
+.del-btn {
+	background-color: #f44336; /* 기본 배경색 */
+	color: white; /* 기본 텍스트 색상 */
+	border: 1px solid white;
+	border-radius: 5px;
+	cursor: pointer;
+	padding : 5px;
+}
+
+.del-btn:hover {
+	background-color: white; /* hover 시 배경색 변경 */
+	font-weight: bold;
+	color: #f44336; /* 기본 텍스트 색상 */
+	border: 1px solid #f44336;
+	transition: background-color 0.2s;
+	padding : 5px;
+}
+
+.sticky-header th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #fff; 
+}
+
+
+.cesium-credit-textContainer {
+  display: none !important;
+}
+
+.cesium-credit-expand-link {
+  display: none !important;
+}
+
+
+.InnerContainer{
+	position : absolute;
+	z-index : 10;
+	width : 20%;
+	height:100%;
+	background-color: rgba(255, 255, 255, 0.2);
+	padding: 20px;
+	border: 1px solid #ccc; /* 회색 테두리 */
+	border-radius: 10px; /* 둥근 모서리 */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
+	transition: opacity 0.3s ease; /* 부드러운 나타남/사라짐 효과 */
+}
+
+.InnerContainer.active {
+  opacity: 1;
+}
+
+#toggleButton {
+	background-color: #007bff; /* 파란색 배경 */
+	color: white; /* 흰색 글씨 */
+	border: none; /* 테두리 없음 */
+	padding: 10px 20px; /* 안쪽 여백 */
+	cursor: pointer; /* 커서 모양 변경 */
+	border-radius: 5px; /* 둥근 모서리 */
+	position: absolute;
+	top: 50%;
+	right: -50px;
+	transform: translateY(-50%);
+}
+
+/* Webkit 스타일 */
+::-webkit-scrollbar {
+  width: 5px; /* 수직 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* 스크롤바 색상 */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 스크롤바 트랙 배경 색상 */
+}

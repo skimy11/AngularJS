@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sample">
+	
+	<select id="LINK_NODE_SEARCH_Dao_siteInfoList" resultType="kr.burin.sample.manage.vo.ManageVO">
+	<![CDATA[
+			SELECT 
+				A.NODE_ID
+				, A.NODE_TYPE
+				, A.SITE_ID
+				, B.SITE_INFO
+				, B.SITE_NM 
+				, B.SITE_TY_MNG_TRML_NM
+			FROM 
+				TM_OD_NODE_SITE A
+				, TM_OD_CATALOG B
+			WHERE 
+				A.SITE_ID = B.SITE_ID 
+
+
+	]]>
+	</select>
+	
+	<select id="LINK_NODE_SEARCH_Dao_diagramList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		WITH T AS (
+			SELECT
+				'U' AS data_typ
+				, LEVEL * -1 AS data_level
+				, LN.LINK_ID
+				, LN.LINK_TYPE
+				, LN.START_NODE
+				, LN.END_NODE
+				, LN.LEN
+				, PN.SITE_NM
+				, PN.SITE_TYPE
+				, PN.GIS_LAYER
+				, PN.NODE_TYPE
+			FROM 
+				TM_OD_LINK_LN LN
+				, TM_OD_NODE_PN PN
+			WHERE 
+				LN.START_NODE = PN.NODE_ID (+)   
+			START WITH LN.END_NODE = #nodeId#
+			CONNECT BY NOCYCLE LN.END_NODE = PRIOR LN.START_NODE 
+				AND LEVEL &lt; 9
+			
+			UNION 
+			
+			SELECT
+				'N' AS data_typ
+				, 0 AS data_level
+				, LN.LINK_ID
+				, LN.LINK_TYPE
+				, LN.START_NODE
+				, LN.END_NODE
+				, LN.LEN
+				, PN.SITE_NM
+				, PN.SITE_TYPE
+				, PN.GIS_LAYER
+				, PN.NODE_TYPE
+			FROM 
+				TM_OD_LINK_LN LN
+				, TM_OD_NODE_PN PN
+			WHERE 
+				LN.END_NODE = PN.NODE_ID (+)   
+				AND LN.END_NODE = #nodeId#
+			
+			UNION 
+			
+			SELECT
+				'D' AS data_typ
+				, LEVEL AS data_level
+				, LN.LINK_ID
+				, LN.LINK_TYPE
+				, LN.START_NODE
+				, LN.END_NODE
+				, LN.LEN
+				, PN.SITE_NM
+				, PN.SITE_TYPE
+				, PN.GIS_LAYER
+				, PN.NODE_TYPE
+			FROM 
+				TM_OD_LINK_LN LN
+				, TM_OD_NODE_PN PN
+			WHERE 
+				LN.END_NODE = PN.NODE_ID (+)   
+			START WITH LN.START_NODE = #nodeId#
+			CONNECT BY NOCYCLE PRIOR LN.END_NODE = LN.START_NODE 
+				AND LEVEL &lt; 10
+		)
+		SELECT
+			DATA_TYP
+			,DATA_LEVEL
+			,LINK_ID
+			,LINK_TYPE
+			,START_NODE
+			,END_NODE
+			,TO_CHAR(LEN, 'FM999,999,999.00') || ' m' AS LEN
+			,SITE_NM
+			,SITE_TYPE
+			,GIS_LAYER
+			,NODE_TYPE
+		FROM T ORDER BY T.data_level
+	]]>
+	</select>
+	
+</mapper>

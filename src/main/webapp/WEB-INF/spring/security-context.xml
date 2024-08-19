@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http pattern="/css/**" 		security="none" />
+	<http pattern="/font/**" 		security="none" />
+ 	<http pattern="/images/**" 		security="none" />
+ 	<http pattern="/include/**" 	security="none" />
+	<http pattern="/js/**" 			security="none" />
+ 	<http pattern="/resources/**" 	security="none" />
+	<http pattern="/scripts/**" 	security="none" />
+	<http pattern="/templates/**" 	security="none" />
+	
+
+	<http auto-config="true" use-expressions="true">
+		<csrf disabled="true"/>
+		<form-login login-page="/" authentication-failure-url="/"
+			username-parameter="j_username"
+			password-parameter="j_password"
+			authentication-success-handler-ref="authentication-success-handler"
+			authentication-failure-handler-ref="authentication-failure-handler"
+			login-processing-url="/j_security_check" />
+
+		<logout logout-url="/j_security_logout"
+				success-handler-ref="logoutSuccessHandler"
+				invalidate-session="true"
+		/>
+		
+		<session-management invalid-session-url="/">
+		<!-- <session-management> -->
+			<concurrency-control max-sessions="1" expired-url="/" error-if-maximum-exceeded="false"/>
+		</session-management>
+		
+		<intercept-url pattern="/user" access="isAuthenticated()" />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider ref="userLoginProvider" />
+	</authentication-manager>
+	
+	<beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+	
+	<beans:bean id="userLoginProvider" class="kr.burin.sample.security.UserLoginAuthenticationProvider"></beans:bean>
+
+	<beans:bean id="authentication-success-handler" class="kr.burin.sample.security.LoginAuthSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/"></beans:property>
+	</beans:bean>
+
+	<beans:bean id="authentication-failure-handler" class="kr.burin.sample.security.LoginAuthFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/"></beans:property>
+	</beans:bean>
+
+	<beans:bean id="logoutSuccessHandler"
+	class="kr.burin.sample.security.UserLogoutAuthenticationProvider"></beans:bean>
+
+</beans:beans>              

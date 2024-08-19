@@ -1,0 +1,14 @@
+<script type="text/javascript" src="${ctx}/scripts/sample/ctrl_sample.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu1/ctrl_menu1.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu1/modal/ctrl_detail_info.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu2/ctrl_menu2.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu3/ctrl_menu3.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu31/ctrl_menu31.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu32/ctrl_menu32.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu33/ctrl_menu33.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu4/ctrl_menu4.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/soo/modal/ctrl_soo_modal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/soo/modal/ctrl_soo_newWritemodal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/soo/modal/ctrl_soo_updatemodal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/menu4/modal/ctrl_menu4_modal.js?v=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="${ctx}/scripts/soo/ctrl_soo.js?v=<%=System.currentTimeMillis()%>"></script>

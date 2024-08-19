@@ -1,0 +1,29 @@
+<div class="wrap">
+	<div class="window bg_gray">
+		<div class="titrap">
+			<h3>작성</h3>
+		</div>
+		<div class="pop_body">
+			<div class="box">
+				<div class="grap">
+					<div class="input_row" style="width:100%">
+						<h3 style="width:100%">제목 
+							<input type="text" id="newTitle" ng-model="soo.obj.newTitle" style="width:94%">
+						</h3>
+					</div>
+				</div>
+			</div>
+			<div class="box" style="height:400px;">
+				<div class="grap">
+					<textarea id="newCnt" ng-model="soo.obj.newCnt" style="width: 100%;height: 390px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+				</div>
+			</div>
+			<button type="submit" class="button" ng-click="input_soo_info.func.add()" style="float: right;">
+				<span class="">저장</span>
+			</button>
+		</div>
+		<button type="button" class="bn_close" ng-click="soo.func.cancel()">
+			<span class="sr-only">닫기</span>
+		</button>
+	</div>
+</div>

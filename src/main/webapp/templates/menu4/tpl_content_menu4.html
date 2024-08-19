@@ -1,0 +1,113 @@
+<div class="content_wrap">
+	<div id="location" class="title_wrap">
+		<h2 class="page__title">게시판</h2>
+	</div>
+	<div id="txt">
+		<div class="searchbox">
+			<div class="title_wrap">
+				<strong>SEARCH</strong>
+			</div>
+			<div class="formwrap">
+				<form ng-submit="board.func.searchBoard()">
+					<fieldset>
+						<div class="row">
+							<div class="input_row">
+								<strong>작성날짜</strong>
+								<div class="box_period focus">
+									<date-Picker ng-model="board.obj.regDateStart"
+										id="regDateStart" class="expect_date input_select" callback="board.func.dateChange('start')"
+										format="yyyy-MM-dd" autohide="true" value=""></date-Picker>
+								</div>
+								<span> - </span>
+								<div class="box_period focus">
+									<date-Picker ng-model="board.obj.regDateEnd" id="regDateEnd"
+										class="expect_date input_select" callback="board.func.dateChange('end')" format="yyyy-MM-dd"
+										autohide="true" value=""></date-Picker>
+								</div>
+							</div>
+							<div class="input_row">
+								<label for="titleKeyward">제목</label> <input type="text"
+									id="titleKeyward" ng-model="board.obj.titleKeyword">
+							</div>
+							<div class="input_row">
+								<label for="contentKeyward">내용</label> <input type="text"
+									id="contentKeyward" ng-model="board.obj.contentKeyword">
+							</div>
+							<div class="input_row">
+								<label for="writerName">작성자</label> <input type="text"
+									id="writerName" ng-model="board.obj.writerName">
+							</div>
+							<div class="input_row">
+								<button type="submit" class="button">
+									<i></i>검색
+								</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div class="search_result_tit">
+			<div class="lcon">
+				<h3>조회 결과</h3>
+				<div class="num_total">{{ board.obj.cnt }}</div>
+			</div>
+			<button type="submit" class="button">
+				<i></i>작성
+			</button>
+		</div>
+		<table class="table-default">
+			<colgroup>
+				<col>
+				<col>
+				<col>
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">NO.</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="data in board.obj.boardList track by $index" ng-click="board.func.openMoal(data)">
+					<td>{{ data.id }}</td>
+					<td>{{ data.title }}</td>
+					<td>{{ data.writerName }}</td>
+					<td>{{ data.regDate }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- [include] pagenate -->
+		<div id="pagenate">
+			<ul class="pagination pg-blue">
+				<li class="bn first"><a href="#" class="page-link"
+					ng-click="page.goToMin()"> <span class="sr-only">첫번째페이지</span>
+				</a></li>
+				<li class="bn previous"><a href="#" ng-click="page.goToBack()">
+						<span class="sr-only">이전페이지</span>
+				</a></li>
+				<li class="page-item"
+					ng-repeat="i in page.pagination track by $index"
+					ng-if="page.paginationPage - 1 <= ($index / page.pageInPage) && ($index / page.pageInPage) < page.paginationPage">
+					<a ng-if="$index +1 != page.currentPage"
+					ng-click="page.setCurrentPage($index+1)" class="page-link">
+						{{$index+1}}</a> <a ng-if="$index +1 == page.currentPage"
+					class="page-link active">{{$index+1}}</a>
+				</li>
+				<li class="bn next"><a href="#" class="page-link"
+					ng-click="page.goToFront()"> <span>&gt;</span> <span
+						class="sr-only">다음페이지</span>
+				</a></li>
+				<li class="bn last"><a href="#" class="page-link"
+					ng-click="page.goToMax()"> <span class="sr-only">마지막페이지</span></a>
+				</li>
+			</ul>
+		</div>
+		<!-- //[include] pagenate -->
+		<!-- //문서 조회 결과-->
+
+	</div>
+</div>

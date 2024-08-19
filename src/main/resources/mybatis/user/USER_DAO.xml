@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+	
+	<!-- 데이터 저장 -->
+	<insert id="USER_DAO_PUT_USER_INFO" parameterType="kr.burin.sample.user.vo.UserVo">
+		<![CDATA[
+			INSERT INTO tb_user_manage (email, user_id, user_passwd, phone_number, user_name) 
+			VALUES(#{email}, #{user_id}, #{user_passwd}, #{phone_number}, #{user_name})
+		]]>
+	</insert>
+	
+	<!-- 데이터 조회 -->
+	
+	<select id="USER_LOGIN" parameterType="String" resultType="kr.burin.sample.user.vo.UserVo">
+			SELECT
+				email, 
+				user_id, 
+				user_passwd, 
+				phone_number, 
+				user_name, 
+				reg_date, 
+				use_type
+			FROM tb_user_manage
+			WHERE 1 = 1
+				AND user_id=#{value}
+	</select>
+
+
+	<select id="USER_DAO_GET_USER_INFO" resultType="kr.burin.sample.user.vo.UserVo">
+		<![CDATA[
+			SELECT
+				email, 
+				user_id, 
+				user_passwd, 
+				phone_number, 
+				user_name, 
+				reg_date, 
+				use_type
+			FROM tb_user_manage 
+			WHERE 1=1
+			ORDER BY reg_date DESC  
+		]]>
+	</select>
+	
+	<delete id="USER_DAO_DELETE_USER_INFO" parameterType="String">
+		<![CDATA[
+			DELETE FROM tb_user_manage WHERE user_id=#{value}
+		]]>
+	</delete>
+	
+</mapper>

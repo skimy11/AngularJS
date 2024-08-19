@@ -1,0 +1,25 @@
+<div
+	style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+	<div id="cesiumContainer" cesium-viewer>
+		<div class="item_location">
+			<button ng-click="menu2.func.zoomIn()">+</button>
+			<button ng-click="menu2.func.zoomOut()">-</button>
+		</div>
+		<div class="item_tool">
+			<!-- <button ng-click="menu2.func.toggleMode()" ng-class="{'cursor-move' : menu2.obj.isAreaSelectionMode, 'cursor-selection' : !menu2.obj.isAreaSelectionMode}"></button> -->
+			<button ng-click="menu2.func.toggleMode('rectangle')" ng-class="{'active' : menu2.obj.isAreaSelectionMode && menu2.obj.shapeType == 'rectangle', '' : !menu2.obj.isAreaSelectionMode}">□</button>
+			<button ng-click="menu2.func.toggleMode('triangle')" ng-class="{'active' : menu2.obj.isAreaSelectionMode && menu2.obj.shapeType == 'triangle', '' : !menu2.obj.isAreaSelectionMode}">△</button>
+			<button ng-click="menu2.func.toggleMode('circle')" ng-class="{'active' : menu2.obj.isAreaSelectionMode && menu2.obj.shapeType == 'circle', '' : !menu2.obj.isAreaSelectionMode}">○</button>
+			<button ng-click="menu2.func.toggleMode('line')" ng-class="{'active' : menu2.obj.isAreaSelectionMode && menu2.obj.shapeType == 'line', '' : !menu2.obj.isAreaSelectionMode}">선</button>
+		</div>
+		<div class="coordinates-display">
+			<span ng-if="menu2.obj.coordinates.longitude">경도: {{menu2.obj.coordinates.longitude}}, </span>
+			<span ng-if="menu2.obj.coordinates.latitude">위도: {{menu2.obj.coordinates.latitude}}</span>
+		</div>
+		<!-- <div class="InnerContainer">
+			<button id="toggleButton">토글 버튼</button>
+			<button ng-click="menu2.func.flyToPosition()" style="position: absolute;z-index: 10;">버튼</button>
+		</div> -->
+	</div>
+
+</div>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="soo">
+
+	<!-- 게시판 조회 -->
+	<select id="SOO_DAO_GET_SOO" parameterType="kr.burin.sample.soo.vo.SooSearchVO" resultType="kr.burin.sample.soo.vo.SooVO">
+		SELECT id, title, content, writer_name, DATE_FORMAT(reg_date,'%Y-%m-%d %H:%i:%s') AS reg_date
+		FROM sooyeon_board
+		<where>
+			<if test="titleKeyword != null and titleKeyword != ''">
+				title LIKE CONCAT('%', #{titleKeyword}, '%')
+			</if>
+			<if test="contentKeyword != null and contentKeyword != ''">
+				AND content LIKE CONCAT('%', #{contentKeyword}, '%')
+			</if>
+			<if test="writerName != null and writerName != ''">
+				AND writer_name = #{writerName}
+			</if>
+			<if test="regDateStart != null and regDateStart != ''">
+				AND reg_date >= #{regDateStart}
+			</if>
+			<if test="regDateEnd != null and regDateEnd != ''">
+				AND reg_date &lt;= #{regDateEnd}
+			</if>
+		</where>
+		ORDER BY id DESC
+	</select>
+	
+	<!-- 게시판 삭제 -->
+	<delete id="DELETE_LIST" parameterType="String">
+		<![CDATA[
+			DELETE FROM sooyeon_board WHERE id=#{value}
+		]]>
+	</delete>
+	
+	<!-- 게시판 추가 -->
+	<insert id="SOO_DAO_PUT_SOO" parameterType="kr.burin.sample.soo.vo.SooVO">
+		<![CDATA[
+			INSERT INTO sooyeon_board (id, title, content, writer_name, reg_date)
+			VALUES (#{id}, #{title}, #{content}, #{writer_name}, NOW())
+		]]>
+	</insert>
+	
+	<!-- 최신 ID 조회 -->
+	<select id="SOO_DAO_SELECT_MAX_ID" resultType="int">
+        SELECT COALESCE(MAX(id), 0) FROM sooyeon_board
+    </select>
+
+	<!-- 게시판 수정 -->
+	<update id="SOO_DAO_UPDATE_SOO" parameterType="kr.burin.sample.soo.vo.SooVO">
+    <![CDATA[
+	        UPDATE sooyeon_board
+	        SET
+	            title = #{title},
+	            content = #{content},	            
+	            reg_date = NOW()
+	        WHERE id = #{id}
+	    ]]>
+	</update>
+
+	<!-- 게시판 상세 조회 -->
+	<select id="SOO_DAO_SELECT_SOO_BY_ID" parameterType="String" resultType="kr.burin.sample.soo.vo.SooVO">
+		SELECT id, title, content, writer_name AS writerName, reg_date AS regDate
+        FROM sooyeon_board
+        WHERE id = #{id}
+	</select>
+</mapper>

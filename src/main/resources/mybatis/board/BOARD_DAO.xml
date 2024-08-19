@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<select id="BOARD_DAO_GET_BOARD" parameterType="kr.burin.sample.board.vo.BoardSearchVO" resultType="kr.burin.sample.board.vo.BoardVO">
+		SELECT id, title, content, writer_name, DATE_FORMAT(reg_date,'%Y-%m-%d %H:%i:%s') AS reg_date
+		FROM tb_board_manage
+		<where>
+			<if test="titleKeyword != null and titleKeyword != ''">
+				title LIKE CONCAT('%', #{titleKeyword}, '%')
+			</if>
+			<if test="contentKeyword != null and contentKeyword != ''">
+				AND content LIKE CONCAT('%', #{contentKeyword}, '%')
+			</if>
+			<if test="writerName != null and writerName != ''">
+				AND writer_name = #{writerName}
+			</if>
+			<if test="regDateStart != null and regDateStart != ''">
+				AND reg_date >= #{regDateStart}
+			</if>
+			<if test="regDateEnd != null and regDateEnd != ''">
+				AND reg_date &lt;= #{regDateEnd}
+			</if>
+		</where>
+		ORDER BY reg_date DESC
+	</select>
+
+	<!-- <select id="BOARD_DAO_GET_BOARD" parameterType="kr.burin.sample.board.vo.BoardSearchVO" 
+		resultType="kr.burin.sample.board.vo.BoardVO"> SELECT * FROM ( SELECT id, 
+		title, content, writer_name, DATE_FORMAT(reg_date, '%Y-%m-%d %H:%i:%s') AS 
+		reg_date, @rownum := @rownum + 1 AS row_number FROM tb_board_manage JOIN 
+		(SELECT @rownum := 0) r <where> <if test="titleKeyword != null and titleKeyword 
+		!= ''"> title LIKE CONCAT('%', #{titleKeyword}, '%') </if> <if test="contentKeyword 
+		!= null and contentKeyword != ''"> AND content LIKE CONCAT('%', #{contentKeyword}, 
+		'%') </if> <if test="writerName != null and writerName != ''"> AND writer_name 
+		= #{writerName} </if> <if test="regDateStart != null and regDateStart != 
+		''"> AND reg_date >= #{regDateStart} </if> <if test="regDateEnd != null and 
+		regDateEnd != ''"> AND reg_date &lt;= #{regDateEnd} </if> </where> ORDER 
+		BY reg_date DESC ) AS result WHERE row_number BETWEEN #{startNum} AND #{endNum} 
+		</select> -->
+
+
+</mapper>

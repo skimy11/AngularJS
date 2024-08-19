@@ -1,0 +1,30 @@
+<div class="wrap">
+    <div class="window bg_gray">
+        <div class="titrap">
+            <h3>수정</h3>
+        </div>
+        <div class="pop_body">
+            <div class="box">
+                <div class="grap">
+                    <div class="input_row">
+                        <h3 style="width:100%">제목 
+                            <input type="text" id="" ng-model="update_soo_info.obj.title" style="width:657px;">
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="box" style="height:400px;">
+                <div class="grap">
+                    <textarea id="" ng-model="update_soo_info.obj.content" style="width: 100%;height: 390px;  border: 1px solid #ddd; border-radius: 5px;">
+                    </textarea>
+                </div>
+            </div>
+            <button type="submit" class="button" ng-click="update_soo_info.func.update()" style="float: right;">
+                <span class="">저장</span>
+            </button>
+        </div>
+        <button type="button" class="bn_close" ng-click="update_soo_info.func.cancel()">
+            <span class="sr-only">닫기</span>
+        </button>
+    </div>
+</div>

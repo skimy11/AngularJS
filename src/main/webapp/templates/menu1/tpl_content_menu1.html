@@ -1,0 +1,97 @@
+<div style="width:100%;height:100%; position: relative; overflow: hidden;">
+
+	<div style="width:40%; height:100%; float:left;">
+		<div style="margin:20px 10px 20px 20px; width:calc(100% - 30px); height:65%; border: 1px solid #555; border-radius:5px;">
+			<div style="height:40px; padding:10px; background-color: #555;">
+				<span style="font-family: Arial, sans-serif; font-weight: bold; color:#fff;">사용자 등록</span> 
+				<input type="button" value="등록" style="width:42px;height:30px; float:right; margin-top:-5px;" ng-click="input_user_info.func.putUserInfoList()" class="default-btn">
+			</div>
+			<div style="margin:10px 0px 10px 0px; max-height:calc(100% - 60px); overflow:auto;">
+				<table style="width:100%; border-collapse: collapse;">
+					<thead>
+						<tr style="font-size:12px; height:35px;" class="sticky-header">
+							<th style="text-align:center;">E-mail</th>
+							<th style="text-align:center;">사용자 ID</th>
+							<th style="text-align:center;">사용자 비밀번호</th>
+							<th style="text-align:center;">연락처</th>
+							<th style="text-align:center;">사용자 이름</th>
+							<th style="text-align:center;"><input type="button" value="추가" style="width:42px; height:30px; margin-top:-5px;" ng-click="input_user_info.func.add()" class="default-btn"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style="font-size:12px; height:30px;" ng-repeat="data in input_user_info.obj.list track by $index">
+							<td style="width:25%; height:30px; text-align:center;">
+								<input id="idx{{$index}}" title="{{data.chk_msg_email}}" type="text" ng-model="data.email" style="width:90%;height:90%;text-align:center;font-family: Arial, sans-serif; border: none; border-bottom:1px solid #555;">
+							</td>
+							<td style="width:15%; height:30px; text-align:center;"><input type="text" ng-model="data.user_id" style="width:90%;height:90%;text-align:center;font-family: Arial, sans-serif; border: none; border-bottom:1px solid #555;"></td>
+							<td style="width:20%; height:30px; text-align:center;"><input type="password" ng-model="data.user_passwd" style="width:90%;height:90%;text-align:center;font-family: Arial, sans-serif; border: none; border-bottom:1px solid #555;"></td>
+							<td style="width:18%; height:30px; text-align:center;"><input type="text" ng-model="data.phone_number" style="width:90%;height:90%;text-align:center;font-family: Arial, sans-serif; border: none; border-bottom:1px solid #555;"></td>
+							<td style="width:14%; height:30px; text-align:center;"><input type="text" ng-model="data.user_name" style="width:90%;height:90%;text-align:center;font-family: Arial, sans-serif; border: none; border-bottom:1px solid #555;"></td>
+							<td style="width:8%; height:30px; text-align:center;"><input type="button" value="삭제" style="width:42px;" class="del-btn" ng-click="input_user_info.func.del($index)"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div style="margin:0px 20px 20px 20px; width:calc(100% - 30px); height:calc(35% - 60px); border: 1px solid #555; border-radius:5px;">
+			<div style="height:40px; padding:10px; background-color: #555;"><span style="font-family: Arial, sans-serif; font-weight: bold; color:#fff;">사용자 등록 실패</span></div>
+			<div style="margin:10px 0px 10px 0px; height:calc(100% - 40px); overflow:auto;">
+				<table style="width:100%; border-collapse: collapse;">
+					<thead>
+						<tr style="font-size:12px; height:35px;" class="sticky-header">
+							<th style="text-align:center;">E-mail</th>
+							<th style="text-align:center;">사용자 ID</th>
+							<th style="text-align:center;">사용자 비밀번호</th>
+							<th style="text-align:center;">연락처</th>
+							<th style="text-align:center;">사용자 이름</th>
+							<th style="text-align:center;">원인</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style="font-size:12px; height:30px;" ng-repeat="data in fail_input_user_info.obj.list track by $index">
+							<td style="width:25%; height:30px; text-align:center;">{{data.email}}</td>
+							<td style="width:15%; height:30px; text-align:center;">{{data.user_id}}</td>
+							<td style="width:20%; height:30px; text-align:center;">{{data.user_passwd}}</td>
+							<td style="width:18%; height:30px; text-align:center;">{{data.phone_number}}</td>
+							<td style="width:14%; height:30px; text-align:center;">{{data.user_name}}</td>
+							<td style="width:8%; height:30px; text-align:center;"><input type="button" value="상세보기" style="width:84px; height:25px; margin-top:-5px;" class="default-btn" ng-click="fail_input_user_info.func.openDetailInfo(data)"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div style="width:60%; height:calc(100% - 40px); float:left;">
+		<div style="margin:20px 20px 0px 10px; width:calc(100% - 30px); height:100%; border: 1px solid #555; border-radius:5px;">
+			<div style="height:40px; padding:10px; background-color: #555;">
+				<span style="font-family: Arial, sans-serif; font-weight: bold; color:#fff;">사용자 조회</span> 
+				<input type="button" value="조회" style="width:42px;height:30px; float:right; margin-top:-5px;" ng-click="view_user_info.func.getUserInfo()" class="default-btn">
+			</div>
+						<div style="margin:10px 0px 10px 0px; height:calc(100% - 40px); overflow:auto;">
+				<table style="width:100%; border-collapse: collapse;">
+					<thead>
+						<tr style="font-size:12px; height:35px;" class="sticky-header">
+							<th style="text-align:center;">E-mail</th>
+							<th style="text-align:center;">사용자 ID</th>
+							<th style="text-align:center;">사용자 비밀번호</th>
+							<th style="text-align:center;">연락처</th>
+							<th style="text-align:center;">사용자 이름</th>
+							<th style="text-align:center;"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style="font-size:12px; height:30px;" ng-repeat="data in view_user_info.obj.list track by $index" ng-if="data.user_id != 'USER'">
+							<td style="width:25%; height:30px; text-align:center;">{{data.email}}</td>
+							<td style="width:15%; height:30px; text-align:center;">{{data.user_id}}</td>
+							<td style="width:20%; height:30px; text-align:center;">{{data.user_passwd}}</td>
+							<td style="width:18%; height:30px; text-align:center;">{{data.phone_number}}</td>
+							<td style="width:14%; height:30px; text-align:center;">{{data.user_name}}</td>
+							<td style="width:14%; height:30px; text-align:center;"><input type="button" value="삭제" style="width:42px;" class="del-btn" ng-click="delete_user_info.func.deleteUserInfo(data.user_id)"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
